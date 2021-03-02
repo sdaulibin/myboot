@@ -1,0 +1,96 @@
+server:
+  servlet:
+    context-path: /binginx
+  port: 8081
+
+spring:
+  cache:
+    cache-names: test_cache
+  application:
+    name: myboot
+#  shardingsphere:
+#    datasource:
+#      names: ds0,ds1
+#      ds0:
+#        driver-class-name: com.mysql.jdbc.Driver
+#        jdbcUrl: jdbc:mysql://127.0.0.1:3306/ds0?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true&allowPublicKeyRetrieval=true
+#        username: root
+#        password: binginx
+#        type: com.zaxxer.hikari.HikariDataSource
+##        hikari:
+##          maximum-pool-size: 20
+##          minimum-idle: 10
+##          auto-commit: true
+##          pool-name: DS0HikariDataPool
+##          connection-timeout: 30000
+#      ds1:
+#        driver-class-name: com.mysql.jdbc.Driver
+#        jdbcUrl: jdbc:mysql://127.0.0.1:3306/ds1?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true&allowPublicKeyRetrieval=true
+#        username: root
+#        password: binginx
+#        type: com.zaxxer.hikari.HikariDataSource
+#        hikari:
+#          maximum-pool-size: 20
+#          minimum-idle: 10
+#          auto-commit: true
+#          pool-name: DS1HikariDataPool
+#          connection-timeout: 30000
+#    sharding:
+#      default-database-strategy:
+#        inline:
+#          sharding-column: user_id
+#          algorithm-expression: ds$->{user_id % 2}
+#      tables:
+#        t_person:
+#          actual-data-nodes: ds0.t_person_$->{1..2}
+#          tableStrategy:
+#            inline:
+#              sharding-column: person_id
+#              algorithm-expression: t_person_$->{person_id % 2 +1}
+#          key-generator:
+#            column: person_id
+#            type: SNOWFLAKE
+#        t_order:
+#          actual-data-nodes: ds$->{0..1}.t_order
+#          key-generator:
+#            column: order_id
+#            type: SNOWFLAKE
+#        t_order_item:
+#          actual-data-nodes: ds$->{0..1}.t_order_item
+#          key-generator:
+#            column: order_item_id
+#            type: SNOWFLAKE
+#    props:
+#      sql:
+#        show: true
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2B8&allowMultiQueries=true&allowPublicKeyRetrieval=true
+    username: root
+    password: binginx
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      maximum-pool-size: 100
+      minimum-idle: 10
+      auto-commit: true
+      pool-name: MyBootHikariDataPool
+      connection-timeout: 30000
+
+myboot:
+  value:
+    map: "{mciCluster1:'191001|300504',mciCluster2:'191010|160400|176000|176126',mciCluster3:'191010|160400|176000|176126',mciCluster4:'191001|300504|191010|160400|176000|176126'}"
+    map2: "{1:{191001: 'cltNo', 300504: 'cifNo'},2:{191001: 'cltNo', 300504: 'cifNo'}}"
+    map3: "{300504:{1:'cifNo'},191001:{2:'cltNo'},191010:{2:'cltNo'},160400:{1:'cifNo'},176000:{1:'cifNbr'},176126:{1:'cifNbr'}}"
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.binginx.myboot.model
+
+logging:
+  level: DEBUG
+    com:
+      binginx:
+        myboot:
+          mapper: debug

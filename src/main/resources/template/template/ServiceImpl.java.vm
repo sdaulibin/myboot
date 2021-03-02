@@ -1,0 +1,198 @@
+/*
+ *    Copyright (c) 2018-2025, jic All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ * Neither the name of the pig4cloud.com developer nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ * Author: binginx (binginx@gmail.com)
+ */
+package ${package}.${moduleName}.service.impl;
+
+import lombok.extern.slf4j.Slf4j;
+import ${package}.${moduleName}.model.entity.${className};
+import ${package}.${moduleName}.mapper.${className}Mapper;
+import ${package}.${moduleName}.service.${className}Service;
+import org.springframework.stereotype.Service;
+import java.util.List;
+import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
+import com.alibaba.fastjson.JSONObject;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import javax.annotation.Resource;
+import java.math.BigDecimal;
+import com.jic.manager.exception.AppRuntimeException;
+import com.jic.manager.constant.consist.ResponseCode;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+
+@Slf4j
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+    @Resource
+    private ${className}Mapper ${classname}Mapper;
+
+
+    /**
+     * 新增记录
+     *
+     * @param ${classname} 需要保存的入参实体类
+     * @return int 是否保存成功
+     */
+    @Override
+    public int save(${className} ${classname}) {
+        int flag = ${classname}Mapper.insert(${classname});
+        if (flag == 1) {
+            return 1;
+        }else {
+            throw new AppRuntimeException(ResponseCode.EXCEPTION, "新增失败");
+        }
+    }
+
+
+    /**
+     * 保存或修改记录信息
+     * @param ${classname} 需要保存的入参实体类
+     * @return int 是否保存或修改成功
+     */
+    @Override
+    public int saveOrUpdate(${className} ${classname}){
+        log.info("保存或修改记录信息，入参 = {}", JSONObject.toJSONString(${classname}));
+        try {
+            if (${classname} == null) {
+                throw new AppRuntimeException(ResponseCode.EXCEPTION,"入参为空");
+            }
+            if (${classname}.getId() != null && ${classname}.getId() !=0) {
+                log.info("保存或修改记录信息，修改，入参 = {}", JSONObject.toJSONString(${classname}));
+                int flag = ${classname}Mapper.updateByPrimaryKey(${classname});
+                if(flag == 1){
+                    return 1;
+                }
+            }else{
+                log.info("保存或修改记录信息，保存，入参 = {}", JSONObject.toJSONString(${classname}));
+                int flag = ${classname}Mapper.insertSelective(${classname});
+                if(flag == 1){
+                    return 1;
+                }else{
+                    throw new AppRuntimeException(ResponseCode.EXCEPTION,"修改失败");
+                }
+            }
+        } catch (Exception e) {
+            log.error("用户保存或修改失败", e);
+            throw new AppRuntimeException(ResponseCode.EXCEPTION,"用户保存或修改失败");
+        }
+        return -1;
+    }
+
+    /**
+     * 删除记录
+     *
+     * @param ${classname} 需要删除,含有主键的入参实体类
+     * @return int 是否删除成功
+     */
+    @Override
+    public int deleteByPrimaryKey(${className} ${classname}) {
+        int flag = ${classname}Mapper.deleteByPrimaryKey(${classname});
+        if (flag == 1) {
+            return 1;
+        }else {
+            throw new AppRuntimeException(ResponseCode.EXCEPTION, "删除失败");
+        }
+    }
+
+
+    /**
+     * 逻辑删除记录
+     *
+     * @param ${classname} 含有主键的逻辑删除实体类
+     * @return int 是否逻辑删除成功
+     */
+    @Override
+    public int deleteByPrimaryKeyLogically(${className} ${classname}) {
+        ${classname}.setDeleteFlag(1);
+        int flag = ${classname}Mapper.updateByPrimaryKey(${classname});
+        if (flag == 1) {
+            return 1;
+        }else {
+            throw new AppRuntimeException(ResponseCode.EXCEPTION, "逻辑删除记录失败");
+        }
+    }
+
+
+    /**
+     * 修改
+     *
+     * @param ${classname}
+     * @return
+     */
+    @Override
+    public int updateByPrimaryKeySelective(${className} ${classname}){
+        try {
+            log.info("修改记录");
+            ${className} param = new ${className}();
+            BeanUtils.copyProperties(${classname}, param);
+            int flag = ${classname}Mapper.updateByPrimaryKeySelective(param);
+            if (flag == 1) {
+                return 1;
+            }else {
+                throw new AppRuntimeException(ResponseCode.EXCEPTION, "修改记录失败");
+            }
+        } catch (Exception e) {
+            log.error("修改记录失败", e);
+            throw new AppRuntimeException(ResponseCode.EXCEPTION,"修改记录失败");
+        }
+
+    }
+
+    /**
+     * 记录详情
+     *
+     * @param ${classname} 查询的入参实体类
+     * @return 数据库查询到的实体类
+     */
+    @Override
+    public ${className} getByPrimaryKey(${className} ${classname}) {
+        return ${classname}Mapper.selectByPrimaryKey(${classname});
+    }
+
+
+    /**
+     * 分页查询
+     *
+     * @param ${classname} 分页查询入参实体类
+     * @return 含有分页信息的实体类列表
+     */
+    @Override
+    public PageInfo<${className}> listPageBySelective(${className} ${classname}, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        PageHelper.orderBy(" create_time desc");
+        List<${className}> list = ${classname}Mapper.listPageBySelective(${classname});
+        return new PageInfo(list);
+    }
+
+    /**
+     * 不分页查询
+     *
+     * @param ${classname} 不分页查询入参实体类
+     * @return 数据库查到的实体类列表
+     */
+    @Override
+    public List<${className}> listAllRecord(${className} ${classname}) {
+        //分页处理
+        ${classname}.setDeleteFlag(0);
+        return ${classname}Mapper.selectBySelective(${classname});
+    }
+}

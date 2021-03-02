@@ -1,0 +1,18 @@
+2020-06-28 18:29:29,213[][INFO]-[background-preinit]-[org.hibernate.validator.internal.util.Version.<clinit>:21] HV000001: Hibernate Validator 6.0.18.Final
+2020-06-28 18:29:29,494[][INFO]-[main]-[com.binginx.myboot.MybootApplication.logStarting:55] Starting MybootApplication on AppledeMacBook-Pro.local with PID 13992 (/Users/binginx/IdeaProjects/myboot/target/classes started by binginx in /Users/binginx/IdeaProjects/myboot)
+2020-06-28 18:29:29,495[][INFO]-[main]-[com.binginx.myboot.MybootApplication.logStartupProfileInfo:651] No active profile set, falling back to default profiles: default
+2020-06-28 18:29:30,199[][INFO]-[main]-[org.springframework.data.repository.config.RepositoryConfigurationDelegate.multipleStoresDetected:249] Multiple Spring Data modules found, entering strict repository configuration mode!
+2020-06-28 18:29:30,202[][INFO]-[main]-[org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:127] Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2020-06-28 18:29:30,234[][INFO]-[main]-[org.springframework.data.repository.config.RepositoryConfigurationDelegate.registerRepositoriesIn:187] Finished Spring Data repository scanning in 15ms. Found 0 Redis repository interfaces.
+2020-06-28 18:29:30,507[][INFO]-[main]-[org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker.postProcessAfterInitialization:330] Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-06-28 18:29:30,720[][WARN]-[main]-[io.undertow.websockets.jsr.handleDeployment:68] UT026010: Buffer pool was not set on WebSocketDeploymentInfo, the default pool will be used
+2020-06-28 18:29:30,746[][INFO]-[main]-[io.undertow.servlet.log:364] Initializing Spring embedded WebApplicationContext
+2020-06-28 18:29:30,747[][INFO]-[main]-[org.springframework.web.context.ContextLoader.prepareWebApplicationContext:284] Root WebApplicationContext: initialization completed in 1174 ms
+2020-06-28 18:29:31,173[][INFO]-[main]-[org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.initialize:171] Initializing ExecutorService 'bootAsyncExecutor'
+2020-06-28 18:29:31,908[][INFO]-[main]-[io.undertow.start:117] starting server: Undertow - 2.0.29.Final
+2020-06-28 18:29:31,914[][INFO]-[main]-[org.xnio.<clinit>:104] XNIO version 3.3.8.Final
+2020-06-28 18:29:31,924[][INFO]-[main]-[org.xnio.nio.<clinit>:55] XNIO NIO Implementation Version 3.3.8.Final
+2020-06-28 18:29:32,003[][INFO]-[main]-[org.springframework.boot.web.embedded.undertow.UndertowServletWebServer.start:144] Undertow started on port(s) 8081 (http) with context path '/binginx'
+2020-06-28 18:29:32,006[][INFO]-[main]-[com.binginx.myboot.MybootApplication.logStarted:61] Started MybootApplication in 2.927 seconds (JVM running for 3.826)
+2020-06-28 18:30:01,543[][INFO]-[SpringContextShutdownHook]-[org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor.shutdown:208] Shutting down ExecutorService 'bootAsyncExecutor'
+2020-06-28 18:30:01,546[][INFO]-[SpringContextShutdownHook]-[io.undertow.stop:252] stopping server: Undertow - 2.0.29.Final

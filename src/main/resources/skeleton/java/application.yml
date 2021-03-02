@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: jic-biz
+  main:
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+uuc:
+  host: http://uuctest.cosmoplat.com
+  clientId: marketing_center
+  clientSecret: 0f9139db256486d159f94715d3b66ee4
+sms:
+  url: http://message.cosmoplat.com/v1/sms/sendsms
+  accessKey: 2048063643

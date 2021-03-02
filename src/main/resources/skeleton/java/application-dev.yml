@@ -1,0 +1,87 @@
+server:
+  port: 8082
+  #logging:
+  #  level:
+  #    root: INFO
+  config: classpath:logback.xml
+
+spring:
+  datasource:
+    url: jdbc:mysql://40.73.65.243:3306/hotel?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 2wsgsda%lptP!3sd5rti
+    driver-class-name: com.mysql.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 8
+    minIdle: 1
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+    useGlobalDataSourceStat: true
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  config-location: classpath:conf/mybatis-config.xml
+---
+spring:
+  redis:
+    database: 0
+    host: 40.73.65.243
+    port: 6379
+    password: adminjic123456
+    jedis:
+      pool:
+        max-active: 10
+        max-idle: 5
+        min-idle: 0
+        max-wait: 0
+    timeout: 10000
+
+---
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}(${spring.cloud.client.ip-address}:${server.port})
+  client:
+    enabled: true
+    fetch-registry: true
+    register-with-eureka: true
+    instance-info-replication-interval-seconds: 10
+    registry-fetch-interval-seconds: 10
+    service-url:
+      defaultZone: http://127.0.0.1:8081/eureka
+
+ribbon:
+  eureka:
+    enabled: true
+  connectTimeout: 20000
+  readTimeout: 30000
+  MaxAutoRetries: 1 #对当前服务的重试次数
+  MaxAutoRetriesNextServer: 1
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 20000
+        readTimeout: 30000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

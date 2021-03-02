@@ -1,0 +1,91 @@
+/*
+ *    Copyright (c) 2018-2025, jic All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ * Neither the name of the pig4cloud.com developer nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ * Author: binginx (binginx@gmail.com)
+ */
+
+package ${package}.${moduleName}.service;
+
+import ${package}.${moduleName}.model.entity.${className};
+import com.github.pagehelper.PageInfo;
+import java.util.List;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Service {
+    /**
+     * 保存接口
+     * @param ${classname} 保存入参
+     * @return int 是否保存成功
+     */
+    int save(${className} ${classname}) ;
+
+    /**
+     * 保存或修改接口
+     * @param ${classname} 保存或修改入参
+     * @return int 是否保存或修改成功
+     */
+    int saveOrUpdate(${className} ${classname}) ;
+
+    /**
+     * 删除接口
+     * @param ${classname} 删除入参
+     * @return int 是否物理删除成功
+     */
+    int deleteByPrimaryKey(${className} ${classname}) ;
+
+    /**
+     * 删除接口
+     * @param ${classname} 删除入参
+     * @return int 是否逻辑删除成功
+     */
+    int deleteByPrimaryKeyLogically(${className} ${classname}) ;
+
+    /**
+     * 修改
+     *
+     * @param ${classname} 修改入参实体类
+     * @return int 是否修改成功
+     */
+    int updateByPrimaryKeySelective(${className} ${classname}) ;
+
+    /**
+     * 详情
+     *
+     * @param ${classname} 详情查询实体类
+     * @return ${className}数据库查询返回的实体类
+     *  @auther
+     */
+     ${className} getByPrimaryKey(${className} ${classname});
+
+    /**
+     * 分页查询
+     *
+     * @param ${classname} 入参查询实体类
+     * @return 数据库查询到的,分页后的实体类列表
+     */
+    PageInfo<${className}> listPageBySelective(${className} ${classname},int pageNum, int pageSize);
+
+    /**
+     * 不分页查询
+     *
+     * @param ${classname} 查询入参实体类
+     * @return 实体类列表
+     */
+    List<${className}> listAllRecord(${className} ${classname});
+}

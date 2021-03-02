@@ -1,0 +1,177 @@
+/*
+ *    Copyright (c) 2018-2025, jic All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ * Neither the name of the pig4cloud.com developer nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ * Author: binginx (binginx@gmail.com)
+ */
+
+package ${package}.${moduleName}.controller;
+
+import ${package}.${moduleName}.model.entity.${className};
+import ${package}.${moduleName}.service.${className}Service;
+import ${package}.${moduleName}.model.vo.request.${className}Request;
+import ${package}.${moduleName}.model.vo.response.${className}Response;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.beans.BeanUtils;
+import com.github.pagehelper.PageInfo;
+import java.util.List;
+import java.util.stream.Collectors;
+import com.jic.common.base.vo.RestResult;
+import lombok.extern.slf4j.Slf4j;
+import com.alibaba.fastjson.JSONObject;
+import com.jic.manager.constant.consist.ResponseCode;
+import lombok.AllArgsConstructor;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+
+@Slf4j
+@RestController
+@AllArgsConstructor
+@RequestMapping("/${pathName}" )
+@Api(value = "${pathName}", tags = "[${comments}]控制类-PC")
+public class ${className}Controller {
+
+    @Autowired
+    private ${className}Service ${classname}Service;
+
+    /**
+     * 新增记录
+     * @param ${classname}Request 新增[${comments}]请求参数
+     * @return ${classname}Response 新增[${comments}]响应参数
+     */
+    @ApiOperation(value = "新增[${comments}]记录")
+    @PostMapping("/save")
+    @ResponseBody
+    public RestResult<Long> save(@RequestBody ${className}Request ${classname}Request) throws Throwable {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}Request, ${classname});
+        long flag =${classname}Service.save(${classname});
+        return RestResult.success(flag);
+    }
+
+    /**
+     * 新增或修改记录
+     * @param ${classname}Request 新增或修改[${comments}]请求参数
+     * @return ${classname}Response 新增或修改[${comments}]响应参数
+     */
+    @ApiOperation(value = "保存或更新[${comments}]")
+    @PostMapping("/saveOrUpdate")
+    @ResponseBody
+    public RestResult<Long> saveOrUpdate(@Validated @RequestBody ${className}Request ${classname}Request) throws Throwable {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}Request, ${classname});
+        long flag = ${classname}Service.saveOrUpdate(${classname});
+        return RestResult.success(flag);
+    }
+
+    /**
+     * 删除记录
+     * @param ${classname}Request 删除[${comments}]请求参数
+     * @return ${classname}Response 删除[${comments}]响应参数
+     */
+    @ApiOperation(value = "删除[${comments}]记录")
+    @PostMapping("/delete")
+    @ResponseBody
+    public RestResult<Long> delete(@RequestBody ${className}Request ${classname}Request) throws Throwable {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}Request, ${classname});
+        long flag =${classname}Service.deleteByPrimaryKeyLogically(${classname});
+        return RestResult.success(flag);
+    }
+
+    /**
+     * 修改记录
+     * @param ${classname}Request 修改[${comments}]请求参数
+     * @return ${classname}Response 修改[${comments}]响应参数
+     */
+    @ApiOperation(value = "修改[${comments}]记录")
+    @PostMapping("/update")
+    @ResponseBody
+    public RestResult<Long> update(@RequestBody ${className}Request ${classname}Request) throws Throwable {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}Request, ${classname});
+        long flag =${classname}Service.updateByPrimaryKeySelective(${classname});
+        return RestResult.success(flag);
+    }
+
+    /**
+     * 单表查询详情信息
+     * @param ${classname}Request 查询[${comments}]详情请求参数
+     * @return ${className}Response 查询[${comments}]详情响应参数
+     */
+    @PostMapping("/getByPrimaryKey")
+    @ApiOperation(value = "查询[${comments}]详情")
+    @ResponseBody
+    public RestResult<${className}Response> getByPrimaryKey(@Validated  @RequestBody ${className}Request ${classname}Request) {
+        log.info("查询详情请求参数入参，{}", JSONObject.toJSONString(${classname}Request));
+        if (${classname}Request!=null && ${classname}Request.getId()!=null) {
+
+            ${className} ${classname} = new ${className}();
+            BeanUtils.copyProperties(${classname}Request, ${classname});
+            ${className} result =${classname}Service.getByPrimaryKey(${classname});
+            log.info("查询详情请求参数出参，{}", JSONObject.toJSONString(result));
+            if (result == null) {
+                return RestResult.error(ResponseCode.EXCEPTION, "记录不存在");
+            }
+            ${className}Response ${classname}Response = new ${className}Response();
+            BeanUtils.copyProperties(result, ${classname}Response);
+            return RestResult.success(${classname}Response);
+        }
+        log.info("查询详情请求结束");
+        return RestResult.success(new ${className}Response());
+    }
+
+    /**
+     * 分页查询
+     * @param ${classname}Request 分页查询请求参数
+     * @return 分页列表
+     * @throws Throwable 业务异常和系统异常
+     */
+    @PostMapping("/listPage")
+    @ApiOperation(value = " 分页查询列表 ")
+    @ResponseBody
+    public RestResult<PageInfo<${className}>> listPage (@RequestBody ${className}Request ${classname}Request) throws Throwable {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}Request, ${classname});
+        return RestResult.success(${classname}Service.listPageBySelective(${classname}, ${classname}Request.getPageSize(), ${classname}Request.getPageNum()));
+    }
+
+    /**
+     * ${tableName} 查询列表（不分页）
+     * @param  ${classname}Request 前端请求参数
+     */
+    @PostMapping("/listAll")
+    @ApiOperation(value = "不分页查询 [${comments}] ")
+    @ResponseBody
+    public RestResult<List<${className}Response>>  list${className}AllRecord(@RequestBody ${className}Request ${classname}Request) throws Throwable {
+        ${className} ${classname} = new ${className}();
+        BeanUtils.copyProperties(${classname}Request, ${classname});
+        List<${className}> list =${classname}Service.listAllRecord(${classname});
+        List<${className}Response> responseList = list.stream().map(temp -> {
+            ${className}Response bo = new ${className}Response();
+            BeanUtils.copyProperties(temp, bo);
+            return bo;
+        }).filter(item -> item != null).collect(Collectors.toList());
+        return RestResult.success(responseList);
+    }
+
+}

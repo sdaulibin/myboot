@@ -1,0 +1,77 @@
+/*
+ *    Copyright (c) 2018-2025, jic All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions are met:
+ *
+ * Redistributions of source code must retain the above copyright notice,
+ * this list of conditions and the following disclaimer.
+ * Redistributions in binary form must reproduce the above copyright
+ * notice, this list of conditions and the following disclaimer in the
+ * documentation and/or other materials provided with the distribution.
+ * Neither the name of the pig4cloud.com developer nor the names of its
+ * contributors may be used to endorse or promote products derived from
+ * this software without specific prior written permission.
+ * Author: binginx (binginx@gmail.com)
+ */
+
+package ${package}.${moduleName}.mapper;
+
+import ${package}.${moduleName}.model.entity.${className};
+import java.util.List;
+
+/**
+ * ${comments}
+ *
+ * @author ${author}
+ * @date ${datetime}
+ */
+public interface ${className}Mapper {
+    /**
+	 * ${tableName}插入数据
+	 * @param ${classname} 入参实体类
+	 */
+    int insert (${className} ${classname});
+
+    /**
+     * ${tableName}插入数据
+     * @param ${classname} 入参实体类
+     */
+    int insertSelective (${className} ${classname});
+
+    /**
+     * ${tableName}根据表对象数据修改数据
+     * @param ${classname} 入参实体类
+     */
+    int updateByPrimaryKey (${className} ${classname});
+
+    /**
+     * ${tableName}根据表对象数据修改数据
+     * @param ${classname} 入参实体类
+     */
+    int updateByPrimaryKeySelective (${className} ${classname});
+
+    /**
+     * ${tableName}根据id删除数据
+     * @param ${classname} 入参实体类
+     */
+    int deleteByPrimaryKey (${className} ${classname});
+
+    /**
+     * ${tableName}根据主键查询数据
+     * @param ${classname} 入参实体类
+     */
+     ${className} selectByPrimaryKey (${className} ${classname});
+
+    /**
+     * ${tableName}根据主键查询数据
+     * @param ${classname} 入参实体类
+     */
+    List<${className}> listPageBySelective (${className} ${classname});
+
+    /**
+     * M_BOOK_INFO查询数据
+     * @param ${classname} 入参实体类
+     */
+    List<${className}>  selectBySelective (${className} ${classname});
+}
